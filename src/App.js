@@ -5,12 +5,26 @@ import Note from './components/Note';
 import './App.css';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      showNote: false
+    };
+  }
+
+  toggleNote = () => {
+    this.setState({
+      showNote: ! this.state.showNote
+    })
+  }
+
   render() {
+    const { showNote } = this.state;
+
     return (
       <div className="App">
-        <Nav />
-        <List />
-        <Note />
+        <Nav toggleNote={this.toggleNote} showNote={showNote} />
+        { showNote ? <Note /> : <List /> }
       </div>
     );
   }
